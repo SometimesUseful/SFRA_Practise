@@ -1,0 +1,26 @@
+<isset name="isMobile" value="${/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)}" scope="page" />
+
+<li class="color-attribute ${!refinementValue.selectable ? 'disabled' : ''}">
+    <button data-href="${refinementValue.url}">
+    <isif condition="${isMobile}">
+        <span class="${refinementValue.swatchId} swatch-circle color-value swatch-mark
+              <isif condition="${refinementValue.selected && refinementValue.selectable}">selected</isif>
+              <isif condition="${!refinementValue.selectable}">disabled</isif>"
+        >
+        </span>
+        </br>
+    <iselse/>
+        <span class="color-value swatch-mark
+              <isif condition="${refinementValue.selected && refinementValue.selectable}">selected</isif>
+              <isif condition="${!refinementValue.selectable}">disabled</isif>"
+        > ${refinementValue.displayValue}(${refinementValue.hitCount})
+
+        </span>
+    </isif>
+        
+        <span id="${refinementValue.swatchId}-assistive" class="sr-only selected-assistive-text">
+            ${refinementValue.selected && refinementValue.selectable ? Resource.msg('msg.assistive.selected.text', 'common', null) : ''}
+            ${refinementValue.title}
+        </span>
+    </button>
+</li>
